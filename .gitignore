@@ -1,3 +1,10 @@
+data/
+model/
+onnx_deploy/
+PyDemo/
+yolov5/
+myenv/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
