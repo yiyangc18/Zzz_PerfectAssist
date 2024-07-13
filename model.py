@@ -202,7 +202,7 @@ def get_model(model_name='cnn', input_height=412, input_width=234, num_classes=3
         raise ValueError(f"Unknown model name '{model_name}'")
 
 if __name__ == "__main__":
-    from dataloaderNoGray import get_dataloader
+    from dataloader import get_dataloader
     import config
     import torch
     import torch.nn as nn

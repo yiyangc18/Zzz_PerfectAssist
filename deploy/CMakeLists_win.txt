@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.10)
+project(ONNXRuntimeDemo)
+
+set(CMAKE_CXX_STANDARD 11)
+set(ONNXRUNTIME_DIR "C:/Users/24760/Desktop/Researches/DRL/Zzz_PerfectAssist/onnx_deploy/onnxruntime-win-arm64-1.18.1")
+set(OpenCV_DIR "D:/Program Files/opencv/build")
+
+find_package(OpenCV REQUIRED)
+
+include_directories(${OpenCV_INCLUDE_DIRS} "${ONNXRUNTIME_DIR}/include")
+link_directories("${ONNXRUNTIME_DIR}/lib" "${OpenCV_DIR}/x64/vc16/lib")
+
+add_executable(onnx_inference onnx_deploy_test.cpp)
+target_link_libraries(onnx_inference ${OpenCV_LIBS} onnxruntime.lib)  # 确保链接到 onnxruntime.lib
+
+# 设置运行时路径以包含DLL
+set_target_properties(onnx_inference PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/Release"
+)
+
+# 复制ONNX Runtime DLL文件到运行时目录
+add_custom_command(TARGET onnx_inference POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${ONNXRUNTIME_DIR}/lib/onnxruntime.dll"
+    $<TARGET_FILE_DIR:onnx_inference>
+)

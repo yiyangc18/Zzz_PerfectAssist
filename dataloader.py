@@ -11,7 +11,8 @@ from tqdm import tqdm
 import random
 
 import config
-from preprocess import preprocess_image
+# from preprocess import preprocess_image
+from preprocess import preprocess_image_onlyresize  # 使用新的预处理函数
 
 class GameDataset(Dataset):
     def __init__(self, image_dirs, transform=None):
@@ -27,7 +28,7 @@ class GameDataset(Dataset):
             if img_name.endswith('.jpg') or img_name.endswith('.png'):
                 img_path = os.path.join(image_dirs[red_flash_label], img_name)
                 image = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
-                image = preprocess_image(image, target_size=(config.INPUT_SIZE, config.INPUT_SIZE_HIGH))
+                image = preprocess_image_onlyresize(image, target_size=(config.INPUT_SIZE, config.INPUT_SIZE_HIGH))
                 image = np.expand_dims(image, axis=0)  # 添加通道维度，使其变为 (1, H, W)
                 image = np.transpose(image, (1, 2, 0))  # 转换为 (H, W, 1)
                 if self.transform:

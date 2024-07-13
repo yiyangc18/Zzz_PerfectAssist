@@ -7,6 +7,7 @@ import torchvision.transforms as transforms
 import time
 import mss
 from screen_show import OverlayText 
+import config  
 
 # 定义类别名称和对应颜色的映射关系
 class_names = {
@@ -99,5 +100,5 @@ def get_prediction(ort_session, input_tensor):
     return ort_outs
 
 # 指定模型路径并运行视频处理
-model_path = 'model/best_model_9474.onnx'
+model_path = config.ONXX_MODEL_PATH
 process_video(model_path)

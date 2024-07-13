@@ -1,9 +1,11 @@
 data/
 model/
-onnx_deploy/
 PyDemo/
 yolov5/
 myenv/
+onnx_deploy\onnxruntime-win-arm64-1.18.1
+
+*log.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -7,7 +7,7 @@ from tqdm import tqdm
 import numpy as np
 import torch.optim.lr_scheduler as lr_scheduler
 
-from dataloaderNoGray import get_dataloader
+from dataloader import get_dataloader
 from model import get_model
 import config
 

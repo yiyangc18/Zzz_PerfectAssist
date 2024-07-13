@@ -1,0 +1,15 @@
+在windows安装部署。
+
+编译onnx_deploy_test.cpp 需要两个库：
+opencv和onnx runtime
+
+opencv:
+官网下载的opencv Windows发布版本，exe解压到指定目录，然后在CMakeLists_win.txt中设置OpenCV_DIR为解压目录下的build目录。
+可以随便找一篇Windows opencv部署教程，坑应该不多
+
+onnx_runtime:
+github realse 下载onnxruntime-win-arm64-1.18.1.zip，解压到指定目录，然后在CMakeLists_win.txt中设置ONNXRUNTIME_DIR为解压目录。
+
+windwos其实很多教程推荐的是使用VS创建工程编译，但是我的PC上没有VS，装一个太慢了
+所以使用的是vs code+cmake+mingw编译的方式
+如果遇到困难建议使用VS,有很多opencv+onnx的帖子

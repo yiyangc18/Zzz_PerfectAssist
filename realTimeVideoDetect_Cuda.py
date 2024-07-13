@@ -56,6 +56,12 @@ def initialize_model(model_path, device):
     model.eval()
     return model
 
+# 执行键盘输入动作
+def execute_keyboard_input(key_code):
+    win32api.keybd_event(key_code, 0, 0, 0)
+    time.sleep(0.05)
+    win32api.keybd_event(key_code, 0, win32con.KEYEVENTF_KEYUP, 0)
+
 # 定义实时视频处理函数
 def process_video(model_path):
     # 检查是否有可用的GPU
@@ -67,13 +73,18 @@ def process_video(model_path):
     # 初始化文本覆盖层
     overlay = OverlayText()
 
+    # 初始化计数器
+    frame_count = 0
+    consecutive_prediction_count = 0
+    last_prediction = None
+
     # 打开屏幕捕获
     with mss.mss() as sct:
         # 获取屏幕尺寸
         monitor = sct.monitors[1]
 
         # 主循环
-        while True:
+        while frame_count < config.MAX_FRAME:
             start_time = time.time()
 
             # 捕获屏幕
@@ -92,6 +103,21 @@ def process_video(model_path):
             class_name = class_names.get(class_result, "Unknown")
             text_color = class_colors.get(class_result, (255, 255, 255))  # 默认为白色
 
+            # 检查连续相同预测
+            if class_result == last_prediction:
+                consecutive_prediction_count += 1
+            else:
+                consecutive_prediction_count = 1
+                last_prediction = class_result
+
+            # 当连续预测达到阈值时执行键盘输入
+            if consecutive_prediction_count >= config.SAME_PREDICTION_THRESHOLD:
+                if class_name == "RedFlash":
+                    execute_keyboard_input(config.RED_INPUT)
+                elif class_name == "GoldFlash":
+                    execute_keyboard_input(config.GOLD_INPUT)
+                consecutive_prediction_count = 0  # 重置计数器
+
             # 计算帧率
             end_time = time.time()
             fps = 1 / (end_time - start_time)
@@ -99,6 +125,8 @@ def process_video(model_path):
             # 更新显示文本，并设置颜色
             overlay.update_text(f'{class_name}, FPS: {fps:.2f}', text_color)
 
+            frame_count += 1
+
 # 指定模型路径并运行视频处理
-model_path = 'model/best_model_9474_unflatten.pth'
+model_path = config.PTH_MODEL_PATH
 process_video(model_path)
