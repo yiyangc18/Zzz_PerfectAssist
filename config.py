@@ -20,12 +20,17 @@ INPUT_SIZE_HIGH = 360  # 输入图像大小
 
 
 # 实时画面采集运行参数设置
-MAX_FRAME = 30  # 最大采集帧数 
-SAME_PREDICTION_THRESHOLD = 5 # 连续相同预测却动阈值帧数
-# red flash 键盘输入 默认左shift键
-RED_INPUT = 0x2A
-#gold flash 键盘输入 默认空格键
-GOLD_INPUT = 0x20
+MAX_FRAME = 30  # 最大采集帧数 运行帧数太高占CPU
+SAME_PREDICTION_THRESHOLD = 5 # 连续相同预测-触发阈值帧数
+# red flash 键盘输入 默认Shift键
+# RED_INPUT = 0x10
+# gold flash 键盘输入 默认Spacebar键
+# GOLD_INPUT = 0x20
+
+# red flash 键盘输入Q键
+RED_INPUT = 0x51
+# gold flash 键盘输入E键
+GOLD_INPUT = 0x45
 
 PTH_MODEL_PATH = 'model/best_model_9474_unflatten.pth'
 ONXX_MODEL_PATH = 'model/best_model_9474.onnx'

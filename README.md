@@ -9,6 +9,9 @@
 
 项目演示视频可以查看：[演示视频](https://cloud.tsinghua.edu.cn/f/f290545b6657416bb028/)
 
+其实断断续续玩一星期，尤其是适配上switch pro手柄后，手操体验已经很好了。感觉部署这个自动闪避脚本甚至不如我自己手操。
+所以这个项目适合对'深度学习', 'CV'感兴趣的同学，并不适合只对'自动连携'辅助感兴趣的同学。
+
 ![项目示意图](doc/project_scheme.jpg)
 
 # 使用方法
@@ -129,7 +132,3 @@ chery@chery-ubuntu20:~/code/Zzz_PerfectAssist$ tree -L 2
 - [11号的正确玩法！](https://www.bilibili.com/video/BV1yz421q738)
 - [绝区零首个4K无UI高燃BOSS战！](https://www.bilibili.com/video/BV1tw411n7pt)
 - [4K三测困难模式全BOSS无伤演示！](https://www.bilibili.com/video/BV1UH4y1V7mT)
-
----
-
-希望这版README对你有帮助。如果需要进一步修改或添加内容，请随时告知。
