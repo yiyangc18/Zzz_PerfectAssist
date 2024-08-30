@@ -33,4 +33,4 @@ RED_INPUT = 0x51
 GOLD_INPUT = 0x45
 
 PTH_MODEL_PATH = 'model/best_model_9474_unflatten.pth'
-ONXX_MODEL_PATH = 'model/best_model_9474.onnx'
+ONXX_MODEL_PATH = 'model/9474_simplified_optimized.onnx'

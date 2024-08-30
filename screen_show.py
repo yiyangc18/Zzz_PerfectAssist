@@ -57,11 +57,14 @@ class OverlayText:
         win32gui.UpdateWindow(self.hwnd)  # Ensure WM_PAINT is triggered
 
     def update_text(self, new_text, text_color=(255, 255, 255)):
-        self.text = new_text
-        self.color = text_color  # Update the color
-        # print(f"Updated text: {self.text}")  # Debug information
-        win32gui.InvalidateRect(self.hwnd, None, True)
-        win32gui.UpdateWindow(self.hwnd)  # Ensure WM_PAINT is triggered again
+        if self.text != new_text or self.color != text_color:
+            self.text = new_text
+            self.color = text_color
+            # Temporarily remove InvalidateRect and UpdateWindow to test
+            win32gui.InvalidateRect(self.hwnd, None, True)
+            win32gui.UpdateWindow(self.hwnd)
+            # print(f"Text updated to: {self.text} with color {self.color}")  # Debug信息
+
 
     def wnd_proc(self, hwnd, message, wparam, lparam):
         # print(f"Received message: {message}")
